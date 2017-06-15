@@ -1,24 +1,31 @@
 import React, { Component } from "react";
-import alphabet from "./alphabet.enum";
+import { lettersToNumbers } from "./alphabet.enum";
 
-export default class Display extends Component {
-  render() {
-    const { word } = this.props;
-    const split = word.split("");
-    console.log("split", split)
-    return (
-      <div>
-        {split.map((value, index) => {
-          return (
-            <div key={index} style={styles.row}>
-              <div>{value}</div>
-              <div>{alphabet[value]}</div>
-            </div>
-          )
-        })}
-      </div>
-    )
+export const Display = ({word, number}) => {
+  const letters = word.split("");
+  let formattedNum = number;
+  while(formattedNum > letters.length - 1) {
+    formattedNum = formattedNum - letters.length
   }
+  return (
+    <div>
+      {letters.map((value, index) => {
+        return (
+          <div
+            key={index}
+            style={{
+              display: "inline-block",
+              padding: "10px",
+              backgroundColor: formattedNum === index ? "yellow" : "white"
+            }}
+          >
+            <div>{value}</div>
+            <div>{lettersToNumbers[value]}</div>
+          </div>
+        )
+      })}
+    </div>
+  );
 }
 
 const styles = {
@@ -27,3 +34,5 @@ const styles = {
     padding: "10px"
   }
 }
+
+export default Display;
