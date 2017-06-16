@@ -1,12 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 import { lettersToNumbers } from "./alphabet.enum";
 
-export const Display = ({word, number}) => {
-  const letters = word.split("");
-  let formattedNum = number;
-  while(formattedNum > letters.length - 1) {
-    formattedNum = formattedNum - letters.length
+export const Display = ({keyword, number}) => {
+  const letters = keyword.split("");
+  const styles = {
+    blocks: {
+      height: "30px",
+      width: "30px",
+      border: "solid",
+      borderWidth: "1px",
+      textAlign: "center"
+    }
   }
+
   return (
     <div>
       {letters.map((value, index) => {
@@ -15,24 +21,16 @@ export const Display = ({word, number}) => {
             key={index}
             style={{
               display: "inline-block",
-              padding: "10px",
-              backgroundColor: formattedNum === index ? "yellow" : "white"
+              backgroundColor: number === index ? "yellow" : "white"
             }}
           >
-            <div>{value}</div>
-            <div>{lettersToNumbers[value]}</div>
+            <div style={styles.blocks}>{value}</div>
+            <div style={styles.blocks}>{lettersToNumbers[value]}</div>
           </div>
         )
       })}
     </div>
   );
-}
-
-const styles = {
-  row: {
-    display: "inline-block",
-    padding: "10px"
-  }
 }
 
 export default Display;
