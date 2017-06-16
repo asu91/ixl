@@ -1,7 +1,7 @@
 // import HTMLWebpackPlugin from "html-webpack-plugin"
-var HTMLWebpackPlugin = require("html-webpack-plugin")
+const HTMLWebpackPlugin = require("html-webpack-plugin")
 
-var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
+const HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
   template: __dirname + "/app/index.html",
   filename: "index.html",
   inject: "body"
@@ -22,5 +22,7 @@ module.exports = {
     filename: "transformed.js",
     path: __dirname + "/build"
   },
-  plugins: [HTMLWebpackPluginConfig]
+  plugins: [
+    HTMLWebpackPluginConfig
+  ]
 };

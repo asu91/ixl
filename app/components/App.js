@@ -11,16 +11,21 @@ export default class App extends Component {
       keyword: null,
       number: 0,
       input: "",
-      cipher: ""
+      cipher: "",
+      isLowerCaseLetter: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.isLowerCaseLetter = this.isLowerCaseLetter.bind(this);
   }
 
   handleChange(e) {
-    this.setState({ value: e.target.value });
+    const word = e.target.value;
+    if (this.state.isLowerCaseLetter) {
+      this.setState({ value: word, isLowerCaseLetter: false });
+    }
   }
 
   handleSubmit(e) {
@@ -40,6 +45,17 @@ export default class App extends Component {
     });
   }
 
+  isLowerCaseLetter(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode === 8) {
+      this.setState({ isLowerCaseLetter: true })
+    } else if (charCode < 65 || charCode > 90) {
+      this.setState({ isLowerCaseLetter: false })
+    } else {
+      this.setState({ isLowerCaseLetter: true })
+    }
+}
+
   render() {
     const { value, keyword, number } = this.state;
     return (
@@ -48,7 +64,7 @@ export default class App extends Component {
         <form onSubmit={this.handleSubmit}>
           <label>
             KEYWORD<br/>
-            <input type="text" value={value} onChange={this.handleChange}/>
+            <input type="text" value={value} onChange={this.handleChange} onKeyDown={this.isLowerCaseLetter}/>
           </label>
           <input type="submit" value="Update" style={{backgroundColor: "white"}}/>
         </form>
@@ -61,12 +77,12 @@ export default class App extends Component {
             onClick={this.onClick.bind(this)}
           />
         }
-        <form onSubmit={() => this.setState({ input: "", cipher: "" })}>
-          <input type="text" value={this.state.input}/>
-          <input type="submit" value="Clear"/>
+        <form onSubmit={() => this.setState({ input: "", cipher: "", number: 0 })}>
+          <input type="text" value={this.state.input} readOnly/>
+          <input type="submit" value="Clear" style={{ backgroundColor: "white" }}/>
         </form>
         <h3>Cipher</h3>
-        <input type="text" value={this.state.cipher}/>
+        <input type="text" value={this.state.cipher} readOnly/>
       </div>
     );
   }

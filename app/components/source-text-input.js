@@ -4,8 +4,7 @@ import { alphabet, lettersToNumbers, numbersToLetters} from "./alphabet.enum";
 const SourceTextInput = ({ keyword, number, onClick }) => {
   const styles = {
     row: {
-      display: "inline-block",
-      padding: "5px"
+      display: "inline-block"
     },
     blocks: {
       height: "25px",
@@ -13,6 +12,9 @@ const SourceTextInput = ({ keyword, number, onClick }) => {
       border: "solid",
       borderWidth: "1px",
       textAlign: "center"
+    },
+    button: {
+      backgroundColor: "white"
     }
   }
 
@@ -34,6 +36,7 @@ const SourceTextInput = ({ keyword, number, onClick }) => {
               <button
                 type="button"
                 onClick={() => onClick(letter, transformedLetter)}
+                style={styles.button}
                 >
                   {letter}
                 </button>

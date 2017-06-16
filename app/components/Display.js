@@ -10,11 +10,14 @@ export const Display = ({keyword, number}) => {
       border: "solid",
       borderWidth: "1px",
       textAlign: "center"
+    },
+    container: {
+      marginTop: "20px"
     }
   }
 
   return (
-    <div>
+    <div style={styles.container}>
       {letters.map((value, index) => {
         return (
           <div
